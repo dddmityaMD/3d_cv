@@ -67,22 +67,24 @@ function CarouselCard({
         />
       </mesh>
       <Text
-        position={[0, 0.12, 0.1]}
-        fontSize={0.5}
-        color={hovered || isActive ? '#22D3C1' : 'rgba(142, 243, 232, 0.8)'}
+        position={[0, 0.15, 0.05]}
+        fontSize={0.6}
+        color={hovered || isActive ? '#22D3C1' : '#8EF3E8'}
         anchorX="center"
         anchorY="middle"
-        font="/fonts/inter-v14-latin-700.woff"
+        outlineWidth={0.02}
+        outlineColor="#22D3C1"
       >
         {icon}
       </Text>
       <Text
-        position={[0, -0.2, 0.1]}
-        fontSize={0.2}
-        color={hovered || isActive ? '#EBEEF2' : 'rgba(235,238,242,0.7)'}
+        position={[0, -0.25, 0.05]}
+        fontSize={0.22}
+        color={hovered || isActive ? '#EBEEF2' : '#A0AEC5'}
         anchorX="center"
         anchorY="middle"
-        font="/fonts/inter-v14-latin-500.woff"
+        maxWidth={2}
+        textAlign="center"
       >
         {label}
       </Text>

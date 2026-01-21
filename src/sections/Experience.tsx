@@ -1,22 +1,13 @@
-import { useState } from 'react'
 import type { Content } from '../content/data'
 import { sectionIds } from '../content/data'
 import { SectionHeader } from './SectionHeader'
 
 function ExperienceCard({
   item,
-  showMoreLabel,
-  showLessLabel,
 }: {
   item: Content['experience']['items'][number]
-  showMoreLabel: string
-  showLessLabel: string
 }) {
-  const [expanded, setExpanded] = useState(false)
-  const hasMore = (item.moreBullets?.length ?? 0) > 0
-  const bullets = expanded
-    ? [...item.bullets, ...(item.moreBullets ?? [])]
-    : item.bullets
+  const bullets = [...item.bullets, ...(item.moreBullets ?? [])]
 
   return (
     <article className="max-w-full rounded-3xl border border-border bg-card/70 p-6 shadow-soft">
@@ -31,18 +22,6 @@ function ExperienceCard({
         </div>
         <div className="font-mono text-xs text-muted">{item.dates}</div>
       </div>
-
-      {hasMore && (
-        <div className="mt-3 flex justify-start sm:mt-4">
-          <button
-            type="button"
-            className="rounded-full border border-border bg-bg/30 px-4 py-2 text-sm font-semibold text-fg transition hover:border-accent/40"
-            onClick={() => setExpanded((v) => !v)}
-          >
-            {expanded ? showLessLabel : showMoreLabel}
-          </button>
-        </div>
-      )}
 
       <ul className="mt-4 max-w-full space-y-2 break-words text-sm text-fg">
         {bullets.map((b) => (
@@ -69,8 +48,6 @@ export function Experience({ c }: { c: Content }) {
           <ExperienceCard
             key={`${item.company}-${item.role}`}
             item={item}
-            showMoreLabel={c.experience.showMore}
-            showLessLabel={c.experience.showLess}
           />
         ))}
       </div>
