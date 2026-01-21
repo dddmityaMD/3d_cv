@@ -35,11 +35,11 @@ export function SectionCarousel({
   )
 
   return (
-    <div className="rounded-3xl border border-border bg-card/60 p-4 shadow-soft">
+    <div className="max-w-full rounded-3xl border border-border bg-card/60 p-4 shadow-soft">
       <h3 className="mb-3 text-sm font-semibold text-muted">
         {c.hero.carouselTitle}
       </h3>
-      <div className="flex gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:overflow-visible">
+      <div className="flex max-w-full gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:overflow-visible">
         {items.map((item) => (
           <button
             key={item.id}
