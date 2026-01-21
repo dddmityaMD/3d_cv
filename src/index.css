@@ -44,4 +44,12 @@
   ::selection {
     background: rgb(var(--accent) / 0.25);
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

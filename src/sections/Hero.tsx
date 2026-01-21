@@ -26,15 +26,15 @@ export function Hero({
             ))}
           </div>
 
-          <h1 className="mt-5 max-w-full break-words text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+          <h1 className="mt-5 w-full break-words text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
             {c.hero.name}
           </h1>
-          <p className="mt-2 max-w-full break-words text-xl text-muted">
+          <p className="mt-2 w-full break-words text-xl text-muted">
             {c.hero.title}
           </p>
 
-          <div className="mt-4 max-w-full rounded-xl border border-border bg-card/60 p-4 shadow-soft">
-            <div className="max-w-full space-y-2 break-words text-base text-muted">
+          <div className="mt-4 w-full rounded-xl border border-border bg-card/60 p-4 shadow-soft">
+            <div className="w-full space-y-2 break-words text-base text-muted">
               {c.hero.lines.map((line) => (
                 <p key={line}>{line}</p>
               ))}

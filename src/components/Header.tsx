@@ -20,7 +20,7 @@ export function Header({
   setTheme: (theme: Theme) => void
 }) {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border bg-bg backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
         <a
           href="#"
@@ -63,9 +63,9 @@ export function Header({
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 pb-2 md:hidden">
+      <div className="mx-auto max-w-6xl px-4 pb-3 md:hidden">
         <nav
-          className="flex gap-4 overflow-x-auto pb-1 text-sm text-muted"
+          className="scrollbar-hide flex gap-3 overflow-x-auto pb-1 text-sm text-muted -mx-2 px-2"
           aria-label="Primary"
         >
           {c.header.nav.map((item) => (
