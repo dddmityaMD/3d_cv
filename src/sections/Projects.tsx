@@ -6,7 +6,10 @@ export function Projects({ c }: { c: Content }) {
   return (
     <section id={sectionIds.projects} className="mt-16 scroll-mt-24">
       <SectionHeader title={c.projects.title} />
-      <div className="grid gap-5 md:grid-cols-3">
+      {c.projects.subtitle && (
+        <p className="mt-2 text-sm text-muted">{c.projects.subtitle}</p>
+      )}
+      <div className="mt-6 grid gap-5 md:grid-cols-3">
         {c.projects.items.map((p) => (
           <article
             key={p.title}

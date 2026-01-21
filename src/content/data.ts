@@ -303,6 +303,7 @@ export const content = {
     },
     projects: {
       title: 'Проекты',
+      subtitle: 'Вайб-код проекты',
       view: 'Открыть',
       items: [
         {
@@ -639,6 +640,7 @@ export const content = {
     },
     projects: {
       title: 'Projects',
+      subtitle: 'Vibe code projects',
       view: 'View',
       items: [
         {
