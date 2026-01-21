@@ -56,12 +56,14 @@ export const content = {
       ],
     },
     hero: {
-      heading: 'Дмитрий Дмитриев — Head of Data / Data Strategy Lead',
+      name: 'Дмитрий Дмитриев',
+      title: 'Руководитель направления Data / Руководитель стратегии данных',
       lines: [
         'DWH / data platforms / BI: архитектура, дорожная карта, delivery.',
         'AI-native: Cursor/Claude daily driver, автоматизирую рутину и ускоряю результат.',
       ],
-      badges: ['CEO Союз-317'],
+      badges: ['ex-Cisco', 'ex-EY', 'ex-CEO Союз-317'],
+      carouselTitle: 'Разделы',
       ctas: {
         hh: 'CV (HH)',
         services: 'Услуги',
@@ -398,12 +400,14 @@ export const content = {
       ],
     },
     hero: {
-      heading: 'Dmitry Dmitriev — Head of Data / Data Strategy Lead',
+      name: 'Dmitry Dmitriev',
+      title: 'Head of Data / Data Strategy Lead',
       lines: [
         'DWH / data platforms / BI: architecture, roadmap, delivery.',
         'AI-native: Cursor/Claude daily driver; I automate routine work and ship faster.',
       ],
-      badges: ['CEO, SOYUZ-317'],
+      badges: ['ex-Cisco', 'ex-EY', 'ex-CEO SOYUZ-317'],
+      carouselTitle: 'Sections',
       ctas: {
         hh: 'CV (HH)',
         services: 'Services',

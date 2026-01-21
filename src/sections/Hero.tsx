@@ -1,14 +1,8 @@
 import clsx from 'clsx'
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react'
 import type { Content } from '../content/data'
 import { sectionIds } from '../content/data'
-import { FallbackNav } from '../components/FallbackNav'
-import { hasWebglSupport } from '../lib/webgl'
+import { SectionCarousel } from '../components/SectionCarousel'
 import { scrollToId } from '../lib/scroll'
-
-const ThreeConstellationNav = lazy(
-  () => import('../components/ThreeConstellationNav'),
-)
 
 export function Hero({
   c,
@@ -17,24 +11,6 @@ export function Hero({
   c: Content
   prefersReducedMotion: boolean
 }) {
-  const [show3d, setShow3d] = useState(false)
-  const [canWebgl, setCanWebgl] = useState(false)
-
-  useEffect(() => {
-    setCanWebgl(hasWebglSupport())
-    const t = window.setTimeout(() => setShow3d(true), 0)
-    return () => window.clearTimeout(t)
-  }, [])
-
-  useEffect(() => {
-    setShow3d(canWebgl)
-  }, [canWebgl])
-
-  const nodes = useMemo(
-    () => c.header.nav.map((n) => ({ id: n.id, label: n.label })),
-    [c.header.nav],
-  )
-
   return (
     <section className="pt-10 sm:pt-14">
       <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-start">
@@ -51,8 +27,11 @@ export function Hero({
           </div>
 
           <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-            {c.hero.heading}
+            {c.hero.name}
           </h1>
+          <p className="mt-2 text-xl text-muted">
+            {c.hero.title}
+          </p>
 
           <div className="mt-4 space-y-2 text-base text-muted">
             {c.hero.lines.map((line) => (
@@ -89,26 +68,7 @@ export function Hero({
         </div>
 
         <div>
-          {canWebgl && show3d ? (
-            <Suspense
-              fallback={
-                <div className="h-[260px] w-full animate-pulse rounded-3xl border border-border bg-card/60 shadow-soft" />
-              }
-            >
-              <ThreeConstellationNav
-                nodes={nodes}
-                reducedMotion={prefersReducedMotion}
-                onNavigate={(id) =>
-                  scrollToId(id, prefersReducedMotion ? 'auto' : 'smooth')
-                }
-              />
-            </Suspense>
-          ) : (
-            <div className="rounded-3xl border border-border bg-card/60 p-5 shadow-soft">
-              <p className="text-sm text-muted">{c.hero.constellationHint}</p>
-            </div>
-          )}
-          <FallbackNav c={c} />
+          <SectionCarousel c={c} prefersReducedMotion={prefersReducedMotion} />
         </div>
       </div>
     </section>
