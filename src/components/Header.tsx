@@ -20,7 +20,7 @@ export function Header({
   setTheme: (theme: Theme) => void
 }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-bg backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border bg-bg/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
         <a
           href="#"

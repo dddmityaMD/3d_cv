@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import type { Content } from '../content/data'
 import { sectionIds } from '../content/data'
-import { SectionCarousel } from '../components/SectionCarousel'
+import ThreeCarouselNav from '../components/ThreeCarouselNav'
 import { scrollToId } from '../lib/scroll'
 
 export function Hero({
@@ -26,25 +26,25 @@ export function Hero({
             ))}
           </div>
 
-          <h1 className="mt-5 w-full break-words text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+          <h1 className="mt-5 w-full break-words text-balance text-3xl font-semibold tracking-tight leading-tight hyphens-auto sm:text-5xl">
             {c.hero.name}
           </h1>
-          <p className="mt-2 w-full break-words text-xl text-muted">
+          <p className="mt-2 w-full break-words text-lg text-muted sm:text-xl">
             {c.hero.title}
           </p>
 
           <div className="mt-4 w-full rounded-xl border border-border bg-card/60 p-4 shadow-soft">
-            <div className="w-full space-y-2 break-words text-base text-muted">
+            <div className="w-full space-y-2 break-words text-base text-muted sm:text-base">
               {c.hero.lines.map((line) => (
                 <p key={line}>{line}</p>
               ))}
             </div>
           </div>
 
-           <div className="mt-7 flex w-full flex-wrap gap-3">
+           <div className="mt-7 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
              <a
                className={clsx(
-                 'inline-flex flex-1 items-center justify-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-bg shadow-soft transition hover:opacity-95 sm:flex-initial sm:justify-start',
+                 'inline-flex items-center justify-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-bg shadow-soft transition hover:opacity-95 sm:flex-initial sm:justify-start',
                )}
                href={c.hero.links.hh}
                target="_blank"
@@ -54,14 +54,14 @@ export function Hero({
              </a>
              <button
                type="button"
-               className="inline-flex flex-1 items-center justify-center rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-fg shadow-soft transition hover:border-accent/40 sm:flex-initial sm:justify-start"
+               className="inline-flex items-center justify-center rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-fg shadow-soft transition hover:border-accent/40 sm:flex-initial sm:justify-start"
                onClick={() => scrollToId(sectionIds.services)}
              >
                {c.hero.ctas.services}
              </button>
              <button
                type="button"
-               className="inline-flex flex-1 items-center justify-center rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-fg shadow-soft transition hover:border-accent/40 sm:flex-initial sm:justify-start"
+               className="inline-flex items-center justify-center rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-fg shadow-soft transition hover:border-accent/40 sm:flex-initial sm:justify-start"
                onClick={() => scrollToId(sectionIds.contact)}
              >
                {c.hero.ctas.contact}
@@ -69,8 +69,14 @@ export function Hero({
            </div>
         </div>
 
-        <div>
-          <SectionCarousel c={c} prefersReducedMotion={prefersReducedMotion} />
+         <div>
+          <ThreeCarouselNav
+            c={c}
+            prefersReducedMotion={prefersReducedMotion}
+            onNavigate={(id) =>
+              scrollToId(id, prefersReducedMotion ? 'auto' : 'smooth')
+            }
+          />
         </div>
       </div>
     </section>

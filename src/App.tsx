@@ -49,7 +49,7 @@ function App() {
         setTheme={setTheme}
       />
 
-      <main id="main" className="mx-auto max-w-6xl px-4 pb-24">
+      <main id="main" className="mx-auto max-w-6xl px-4 pb-24 overflow-x-hidden">
         <Hero c={c} prefersReducedMotion={prefersReducedMotion} />
         <About c={c} />
         <Experience c={c} />
