@@ -33,10 +33,12 @@ export function Hero({
             {c.hero.title}
           </p>
 
-          <div className="mt-4 space-y-2 text-base text-muted">
-            {c.hero.lines.map((line) => (
-              <p key={line}>{line}</p>
-            ))}
+          <div className="mt-4 rounded-xl border border-border bg-card/60 p-4 shadow-soft">
+            <div className="space-y-2 text-base text-muted">
+              {c.hero.lines.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
           </div>
 
            <div className="mt-7 flex flex-wrap gap-3">
