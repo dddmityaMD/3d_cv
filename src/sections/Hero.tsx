@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import type { Content } from '../content/data'
 import { sectionIds } from '../content/data'
-import ThreeCarouselNav from '../components/ThreeCarouselNav'
 import { scrollToId } from '../lib/scroll'
 
 export function Hero({
@@ -70,15 +69,23 @@ export function Hero({
         </div>
 
          <div>
-          <ThreeCarouselNav
-            c={c}
-            prefersReducedMotion={prefersReducedMotion}
-            onNavigate={(id) =>
-              scrollToId(id, prefersReducedMotion ? 'auto' : 'smooth')
-            }
-          />
-        </div>
-      </div>
-    </section>
-  )
-}
+           <div className="rounded-3xl border border-border bg-card/60 p-5 shadow-soft">
+             <div className="text-xs font-mono text-muted">{c.hero.carouselTitle}</div>
+             <div className="mt-3 flex flex-wrap gap-2">
+               {c.header.nav.map((n) => (
+                 <button
+                   key={n.id}
+                   type="button"
+                   className="rounded-full border border-border bg-bg/40 px-3 py-1.5 text-xs font-mono text-fg shadow-soft transition hover:border-accent/40"
+                   onClick={() => scrollToId(n.id, prefersReducedMotion ? 'auto' : 'smooth')}
+                 >
+                   {n.label}
+                 </button>
+               ))}
+             </div>
+           </div>
+         </div>
+       </div>
+     </section>
+   )
+ }

@@ -79,6 +79,8 @@ export const content = {
       title: 'О себе',
       body:
         'Проектирую и развиваю корпоративные DWH и data-платформы, BI-системы и интеграционные решения. Совмещаю архитектуру с hands-on работой: модели данных, ETL/ELT-пайплайны, интеграции, CI/CD, код-ревью. Имею опыт работы в enterprise-проектах, консалтинге и продуктовых командах. Выступал в ролях Tech Lead и руководителя направлений, выстраивал взаимодействие со стейкхолдерами уровня C-suite. Запускал ML-продукт в промышленную эксплуатацию. Работал CEO ИТ-компании «Союз-317». Открыт к сотрудничеству в различных форматах: штат, проектная работа, консалтинг, ИП. Привык брать ответственность за результат и стабильно превышать ожидания заказчиков — за счёт системного подхода, автоматизации и активного использования ИИ в аналитике и разработке.',
+      showMore: 'Показать больше',
+      showLess: 'Скрыть',
       focusLabel: 'Фокус',
       focus:
         'DWH, Data Lake, Data Mesh, ETL/ELT, Data Lineage, BI, интеграции, DataOps/MLOps.',
@@ -424,6 +426,8 @@ export const content = {
       title: 'About',
       body:
         'I build and scale enterprise DWH and data platforms, BI systems, and integrations — combining architecture with hands-on: data models, ETL/ELT pipelines, integrations, CI/CD, code review. I have experience in enterprise, consulting, and product teams. Led as Tech Lead and data practice head, interfacing with C-level stakeholders. Took an ML product from hypothesis to production. Served as CEO at IT company «SOYUZ-317». Open to collaboration: full-time, project, consulting, as a contractor. I own results and consistently exceed expectations through system thinking, automation, and active AI use in analytics and development.',
+      showMore: 'Show more',
+      showLess: 'Hide',
       focusLabel: 'Focus',
       focus:
         'DWH, Data Lake, Data Mesh, ETL/ELT, Data Lineage, BI, integrations, DataOps/MLOps.',

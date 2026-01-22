@@ -1,13 +1,26 @@
+import { useMemo, useState } from 'react'
 import type { Content } from '../content/data'
 import { sectionIds } from '../content/data'
 import { SectionHeader } from './SectionHeader'
 
 function ExperienceCard({
   item,
+  showMore,
+  showLess,
 }: {
   item: Content['experience']['items'][number]
+  showMore: string
+  showLess: string
 }) {
-  const bullets = [...item.bullets, ...(item.moreBullets ?? [])]
+  const [expanded, setExpanded] = useState(false)
+
+  const allBullets = useMemo(
+    () => [...item.bullets, ...(item.moreBullets ?? [])],
+    [item.bullets, item.moreBullets],
+  )
+  const previewCount = 2
+  const canToggle = allBullets.length > previewCount
+  const bullets = expanded ? allBullets : allBullets.slice(0, previewCount)
 
   return (
     <article className="max-w-full rounded-3xl border border-border bg-card/70 p-6 shadow-soft">
@@ -32,6 +45,17 @@ function ExperienceCard({
         ))}
       </ul>
 
+      {canToggle && (
+        <button
+          type="button"
+          className="mt-4 inline-flex items-center justify-center rounded-full border border-border bg-bg/40 px-4 py-2 text-xs font-mono text-fg shadow-soft transition hover:border-accent/40"
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+        >
+          {expanded ? showLess : showMore}
+        </button>
+      )}
+
       <div className="mt-4 max-w-full break-words text-xs text-muted">
         <span className="font-mono">Stack:</span> {item.stack}
       </div>
@@ -48,6 +72,8 @@ export function Experience({ c }: { c: Content }) {
           <ExperienceCard
             key={`${item.company}-${item.role}`}
             item={item}
+            showMore={c.experience.showMore}
+            showLess={c.experience.showLess}
           />
         ))}
       </div>
