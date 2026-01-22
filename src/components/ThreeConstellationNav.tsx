@@ -23,6 +23,12 @@ function Scene({
   const group = useRef<Group>(null)
   const [hovered, setHovered] = useState<string | null>(null)
 
+  const accent = 'rgb(var(--accent))'
+  const muted = 'rgb(var(--muted))'
+  const fg = 'rgb(var(--fg))'
+  const card = 'rgb(var(--card) / 0.92)'
+  const border = 'rgb(var(--border))'
+
   useFrame((state, delta) => {
     if (reducedMotion) return
     const g = group.current
@@ -42,7 +48,7 @@ function Scene({
         <Line
           key={`${a}-${b}`}
           points={[nodes[a]!.position, nodes[b]!.position]}
-          color="#22D3C1"
+          color={border}
           transparent
           opacity={0.35}
           lineWidth={1}
@@ -60,9 +66,9 @@ function Scene({
             >
               <sphereGeometry args={[isHovered ? 0.12 : 0.095, 16, 16]} />
               <meshStandardMaterial
-                color={isHovered ? '#22D3C1' : '#8EF3E8'}
-                emissive={isHovered ? '#22D3C1' : '#0B4B44'}
-                emissiveIntensity={isHovered ? 1.2 : 0.65}
+                color={isHovered ? accent : muted}
+                emissive={isHovered ? accent : fg}
+                emissiveIntensity={isHovered ? 0.9 : 0.12}
               />
             </mesh>
             {isHovered && (
@@ -75,9 +81,9 @@ function Scene({
                   style={{
                     padding: '6px 10px',
                     borderRadius: 999,
-                    background: 'rgba(16, 20, 26, 0.85)',
-                    border: '1px solid rgba(34, 211, 193, 0.35)',
-                    color: 'rgba(235,238,242,0.92)',
+                    background: card,
+                    border: `1px solid ${border}`,
+                    color: fg,
                     fontFamily: '"IBM Plex Mono", ui-monospace, monospace',
                     fontSize: 12,
                     letterSpacing: '0.02em',
@@ -104,6 +110,10 @@ export default function ThreeConstellationNav({
   onNavigate: (id: string) => void
   reducedMotion: boolean
 }) {
+  const canRender = nodes.length >= 6
+
+  if (!canRender) return null
+
   const sceneNodes = useMemo<NodeDef[]>(
     () => [
       { ...nodes[0]!, position: [-1.9, 0.35, 0] },
@@ -136,6 +146,7 @@ export default function ThreeConstellationNav({
         camera={{ position: [0, 0, 4.3], fov: 50 }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         frameloop={reducedMotion ? 'demand' : 'always'}
+        style={{ touchAction: 'pan-y' }}
       >
         <Scene
           nodes={sceneNodes}

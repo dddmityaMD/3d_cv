@@ -1,149 +1,135 @@
 # Agent Guidelines for 3d_cv
 
-This repo is a single-page CV website (RU/EN) with a lightweight 3D constellation navigation.
-Stack: Vite + React + TypeScript + Tailwind + three.js (via @react-three/fiber + @react-three/drei).
+Single-page CV site (RU/EN) with lightweight 3D constellation navigation.
+Stack: Vite + React + TypeScript + TailwindCSS + three.js via @react-three/fiber + @react-three/drei.
 
 ## Build / Lint / Test
 
 ```bash
-# Install deps
+# Install
 npm i
 
-# Dev server (localhost:5173)
+# Dev server (Vite, http://localhost:5173)
 npm run dev
 
-# Type-check + build to dist/
+# Type-check + production build (tsc -b && vite build)
 npm run build
 
 # Preview production build
 npm run preview
 
-# Lint
+# Lint (ESLint flat config: eslint.config.js)
 npm run lint
+
+# Deploy to GitHub Pages (gh-pages -d dist)
+npm run deploy
 ```
+
+CI uses Node 20 and runs `npm ci`, `npm run lint`, `npm run build`:
+`.github/workflows/ci-deploy.yml`.
+
+### Tests
+
+There is currently no test runner configured (no `test` script, no Vitest/Jest deps).
+If/when Vitest is added, prefer these commands:
+
+```bash
+# Run all tests once
+npx vitest run
+
+# Run a single test file
+npx vitest run src/components/Header.test.tsx
+
+# Run a single test by name
+npx vitest run -t "scroll" 
+```
+
+## Project Shape
+
+- App entry: `src/main.tsx` renders `src/App.tsx`.
+- All copy + section ids live in `src/content/data.ts` (keep RU/EN in sync).
+- Sections: `src/sections/*` render `<section id={sectionIds.x}>...`.
+- Shared UI: `src/components/*`.
+- Small utilities/hooks: `src/lib/*`.
 
 ## Code Style & Conventions
 
+### TypeScript
+
+- Strict TS is enabled (`tsconfig.app.json`): no unused locals/params, strict mode.
+- Avoid `any`; use `unknown`, discriminated unions, or narrow with runtime checks.
+- Prefer `as const` + `satisfies` for static data (see `src/content/data.ts`).
+- For tuple returns, use `as const` (see `src/lib/useLocalStorageState.ts`).
+
+### Exports
+
+- Prefer named exports for components and helpers.
+- Default exports are acceptable for entrypoints and heavy/lazy components (e.g. `src/App.tsx`).
+
 ### Imports
 
-- Always use named exports from local files: `export function X`, `export const Y`.
-- Import React hooks from `'react'`; `import type` for type-only imports.
-- Group imports: React/lib → local files → external packages.
-- Example:
-  ```ts
-  import { useState, useEffect } from 'react'
-  import { Header } from '../components/Header'
-  import type { Content } from '../content/data'
-  import { scrollToId } from '../lib/scroll'
-  ```
+- Order imports: external packages -> local files.
+- Use `import type` for type-only imports; inline types are OK:
+  `import { content, type Lang } from './content/data'`.
+- Prefer combining imports from the same module (avoid two separate imports from `../content/data`).
 
 ### Formatting
 
-- 2-space indentation, no tabs.
-- Trailing commas for multi-line arrays/objects (Prettier-style, but write manually).
-- Single quotes for strings (except JSX attributes if preferred double quotes).
-- Max line length ~100 chars; split for readability.
-- No unused vars; remove or prefix with `_`.
-
-### Types
-
-- Use `as const` for frozen data structures.
-- Type parameters for generic components, use `ReactNode` for children, `type Props = {}` patterns.
-- Prefer explicit return types for exported functions.
-- No `any`; use `unknown` or well-typed unions.
-- Example:
-  ```ts
-  export type Lang = 'ru' | 'en'
-  export const content = { ru: {...}, en: {...} } as const
-  export type Content = (typeof content)[Lang]
-  ```
+- 2-space indentation; no tabs.
+- Single quotes.
+- Trailing commas in multi-line objects/arrays.
+- Keep lines ~100 chars; wrap JSX props and long strings.
+- No unused variables; prefix intentionally-unused with `_`.
 
 ### Naming
 
-- Components: PascalCase (`Hero.tsx`, `ThreeConstellationNav.tsx`).
-- Hooks/lib helpers: camelCase (`useLocalStorageState.ts`, `scrollToId`).
-- Constants/objects: camelCase (`sectionIds`, `content`).
-- Event handlers: `onX` or `handleX` (`onClick`, `handleSubmit`).
-- File names match exports: `Header.tsx` → `export function Header`.
+- Components: PascalCase file + export (`Header.tsx` -> `export function Header`).
+- Hooks: `useX` (e.g. `usePrefersReducedMotion`).
+- Helpers: camelCase (`scrollToId`).
+- Types: PascalCase (`type SectionId = ...`).
+- Event handlers: `onX` / `handleX`.
 
-### Component Structure
+### React Components
 
-```tsx
-export function ComponentName({ prop, onChange }: Props) {
-  const [state, setState] = useState<type>(initial)
-  
-  useEffect(() => {
-  }, [])
-  
-  return (
-    <section id="x" className="...">
-      <div>...</div>
-    </section>
-  )
-}
-```
+- Use function components and hooks.
+- Prefer `type Props = { ... }` for non-trivial props; inline prop types are fine for small leaf components.
+- Use semantic HTML: `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`, `<button type="button">`.
+- Navigation is via `scrollToId()` (do not rely on default anchor jumps).
 
-- Use `<section>` for top-level sections with proper `id` for anchor navigation.
-- Semantic HTML: `<article>` for cards, `<nav>` for link groups, `<button type="button">` for actions.
-- Class names: Tailwind utility-first; avoid long custom class strings.
+### Styling (Tailwind)
+
+- Use theme tokens (CSS variables) via Tailwind colors: `bg-bg`, `text-fg`, `text-muted`, `border-border`, `text-accent`.
+- Dark mode toggles `.dark` on `<html>` (see `src/index.css` and `src/App.tsx`).
+- Use `clsx` for conditional class names.
+- Avoid arbitrary values unless truly one-off; prefer theme scale.
 
 ### Error Handling
 
-- Use try/catch for async I/O (clipboard, fetch, localStorage parse).
-- Validate user input before dangerous operations (e.g., copy to clipboard).
-- Fallback UI: if WebGL unavailable, show accessible text nav; if lazy load fails, show skeleton/error.
-- Never crash on missing data; use optional chaining and fallback values:
-  ```ts
-  const value = obj?.nested?.prop ?? fallback
-  ```
+- Wrap browser I/O in try/catch (clipboard, localStorage parse).
+- Guard browser globals when needed (`typeof window === 'undefined'`).
+- Prefer early returns over deeply nested conditionals.
+- Never crash on missing elements/data; use optional chaining + fallbacks.
 
-### TailwindCSS
+### Accessibility & Motion
 
-- Use custom design tokens from theme: `bg-bg`, `fg`, `muted`, `card`, `border`, `accent`.
-- Responsive: `sm:`, `md:` prefixes; mobile-first defaults.
-- Dark mode: toggle `.dark` on `<html>`, CSS variables for colors.
-- Avoid arbitrary values (`[260px]`) unless necessary; use scale (`h-[260px]` → define in theme if reused).
+- Keep the skip link working (`src/App.tsx`).
+- Use `aria-label` and `aria-pressed` for toggles.
+- Respect `prefers-reduced-motion` via `usePrefersReducedMotion()`:
+  disable smooth scroll and use `frameloop="demand"` for three-fiber.
 
-### Three.js / 3D
+### three.js / R3F
 
-- Lazy-load with `React.lazy` + `Suspense` for first-paint performance.
-- Keep geometry lightweight: spheres, lines; no textures or heavy assets.
-- Limit point lights; use `ambientLight` for base fill.
-- Respect `prefers-reduced-motion`: disable animation, use `frameloop="demand"`.
-- Keyboard accessibility: fallback nav always visible; nodes must be clickable.
-- Camera: fixed position; avoid camera controls that hijack scroll.
+- Keep geometry/light counts low; no heavy textures/assets.
+- Fixed camera; avoid controls that hijack scroll.
+- Provide a non-WebGL fallback navigation (`src/components/FallbackNav.tsx`).
 
-### Accessibility
+## Cursor / Copilot Rules
 
-- Skip link at top of page with `sr-only` focus style.
-- Focus rings on interactive elements.
-- `aria-label`, `aria-pressed` for togglers.
-- `lang="ru"` default, switchable via localStorage.
-- Color contrast: ensure text on bg passes WCAG AA (Tailwind tokens do this).
+- No `.cursorrules`, `.cursor/rules/*`, or `.github/copilot-instructions.md` found in this repo.
 
-### Data / Content
+## Notes for Agentic Changes
 
-- All copy lives in `src/content/data.ts` as `const content = { ru: {...}, en: {...} }`.
-- Section IDs exported as `sectionIds` constant, referenced everywhere.
-- No string literals in components; always use from `content[lang]`.
-
-### Git & Deploy
-
-- `vite.config.ts` sets `base: '/3d_cv/'` for GitHub Pages.
-- `npm run deploy` publishes `dist/` via `gh-pages`.
-- Add `.gitignore` entries: `node_modules`, `dist`, `.DS_Store`, etc.
-- Commit messages: concise, imperative, English.
-
-## Testing
-
-- Currently no test framework; add Vitest if needed.
-- Run single test: `npm run test src/components/Header.test.tsx`.
-- Test critical paths: scroll navigation, language toggle, copy-to-clipboard.
-
-## Notes for AI Agents
-
-- Always read existing files before editing to understand context and conventions.
-- Run `npm run build` after type changes; fix TS errors before committing.
-- Check LSP diagnostics; address unused imports and missing properties.
-- Preserve RU/EN parity: ensure both languages are updated together.
-- Keep changes minimal and focused; avoid "refactor everything" unless explicitly requested.
+- Read the relevant files before editing; keep changes minimal and localized.
+- After TS changes, run `npm run build` to catch type errors early.
+- Preserve RU/EN parity in `src/content/data.ts` (labels, buttons, a11y copy).
+- Commit messages: short, imperative, English.

@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import type { Content } from '../content/data'
 import { sectionIds } from '../content/data'
+import { Reveal } from '../components/Reveal'
+import { usePrefersReducedMotion } from '../lib/usePrefersReducedMotion'
 import { SectionHeader } from './SectionHeader'
 
 function ExperienceCard({
@@ -64,17 +66,24 @@ function ExperienceCard({
 }
 
 export function Experience({ c }: { c: Content }) {
+  const reducedMotion = usePrefersReducedMotion()
+
   return (
     <section id={sectionIds.experience} className="mt-16 scroll-mt-24">
       <SectionHeader title={c.experience.title} />
       <div className="grid gap-5">
-        {c.experience.items.map((item) => (
-          <ExperienceCard
+        {c.experience.items.map((item, i) => (
+          <Reveal
             key={`${item.company}-${item.role}`}
-            item={item}
-            showMore={c.experience.showMore}
-            showLess={c.experience.showLess}
-          />
+            reducedMotion={reducedMotion}
+            delayMs={i * 70}
+          >
+            <ExperienceCard
+              item={item}
+              showMore={c.experience.showMore}
+              showLess={c.experience.showLess}
+            />
+          </Reveal>
         ))}
       </div>
     </section>

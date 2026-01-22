@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { Header } from './components/Header'
-import { content, type Lang } from './content/data'
+import { content, sectionIds, type Lang, type SectionId } from './content/data'
+import { useActiveSection } from './lib/useActiveSection'
 import { useLocalStorageState } from './lib/useLocalStorageState'
 import { usePrefersReducedMotion } from './lib/usePrefersReducedMotion'
 import { About } from './sections/About'
@@ -16,6 +17,12 @@ type Theme = 'light' | 'dark'
 function App() {
   const [lang, setLang] = useLocalStorageState<Lang>('cv_lang', 'ru')
   const prefersReducedMotion = usePrefersReducedMotion()
+
+  const sectionIdList = useMemo(
+    () => Object.values(sectionIds) as unknown as SectionId[],
+    [],
+  )
+  const activeSectionId = useActiveSection(sectionIdList)
 
   const [theme, setTheme] = useLocalStorageState<Theme>('cv_theme', 'light')
 
@@ -47,10 +54,15 @@ function App() {
         setLang={setLang}
         theme={theme}
         setTheme={setTheme}
+        activeSectionId={activeSectionId}
       />
 
       <main id="main" className="mx-auto max-w-6xl px-4 pb-24 overflow-x-hidden">
-        <Hero c={c} prefersReducedMotion={prefersReducedMotion} />
+        <Hero
+          c={c}
+          prefersReducedMotion={prefersReducedMotion}
+          activeSectionId={activeSectionId}
+        />
         <About c={c} />
         <Experience c={c} />
         <Services c={c} />

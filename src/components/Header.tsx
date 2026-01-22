@@ -12,12 +12,14 @@ export function Header({
   setLang,
   theme,
   setTheme,
+  activeSectionId,
 }: {
   c: Content
   lang: Lang
   setLang: (lang: Lang) => void
   theme: Theme
   setTheme: (theme: Theme) => void
+  activeSectionId: string | null
 }) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/95 backdrop-blur-md">
@@ -26,7 +28,9 @@ export function Header({
           href="#"
           onClick={(e) => {
             e.preventDefault()
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+            const behavior =
+              document.documentElement.style.scrollBehavior === 'auto' ? 'auto' : 'smooth'
+            window.scrollTo({ top: 0, behavior })
           }}
           className="inline-flex items-center gap-3"
         >
@@ -46,7 +50,10 @@ export function Header({
             <a
               key={item.id}
               href={`#${item.id}`}
-              className={clsx('hover:text-fg')}
+              className={clsx(
+                'hover:text-fg',
+                activeSectionId === item.id && 'text-fg',
+              )}
               onClick={(e) => {
                 e.preventDefault()
                 scrollToId(item.id)
@@ -72,7 +79,10 @@ export function Header({
             <a
               key={item.id}
               href={`#${item.id}`}
-              className="whitespace-nowrap rounded-full border border-border bg-card px-3 py-1.5 shadow-soft"
+              className={clsx(
+                'whitespace-nowrap rounded-full border border-border bg-card px-3 py-1.5 shadow-soft',
+                activeSectionId === item.id && 'border-accent/50 bg-accent/10 text-fg',
+              )}
               onClick={(e) => {
                 e.preventDefault()
                 scrollToId(item.id)

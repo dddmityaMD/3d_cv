@@ -63,7 +63,15 @@ export const content = {
         'AI-native: Cursor/Claude daily driver, автоматизирую рутину и ускоряю результат.',
       ],
       badges: ['ex-Cisco', 'ex-EY', 'ex-CEO Союз-317'],
+      proof: [
+        'Data strategy и roadmap',
+        'Lifecycle DWH ~200TB',
+        'Пайплайны 10M+ записей',
+        'Команды до 20',
+      ],
       carouselTitle: 'Разделы',
+      carouselPrev: 'Назад',
+      carouselNext: 'Далее',
       ctas: {
         hh: 'CV (HH)',
         services: 'Услуги',
@@ -73,14 +81,30 @@ export const content = {
         hh: 'https://hh.ru/resume/73d656b6ff00cd8d0d0039ed1f4350786e394d',
       },
       constellationHint:
-        'Нажмите на точку, чтобы перейти к разделу (доступна текстовая навигация).',
+        'Нажмите на карточку, чтобы перейти к разделу.',
     },
     about: {
       title: 'О себе',
-      body:
-        'Проектирую и развиваю корпоративные DWH и data-платформы, BI-системы и интеграционные решения. Совмещаю архитектуру с hands-on работой: модели данных, ETL/ELT-пайплайны, интеграции, CI/CD, код-ревью. Имею опыт работы в enterprise-проектах, консалтинге и продуктовых командах. Выступал в ролях Tech Lead и руководителя направлений, выстраивал взаимодействие со стейкхолдерами уровня C-suite. Запускал ML-продукт в промышленную эксплуатацию. Работал CEO ИТ-компании «Союз-317». Открыт к сотрудничеству в различных форматах: штат, проектная работа, консалтинг, ИП. Привык брать ответственность за результат и стабильно превышать ожидания заказчиков — за счёт системного подхода, автоматизации и активного использования ИИ в аналитике и разработке.',
+      positioning: [
+        'Веду data-стратегию и delivery: roadmap, архитектура платформы, governance и BI, которым доверяют руководители.',
+        'Совмещаю стратегию с hands-on архитектурой: DWH/lakehouse, жизненный цикл данных, интеграции, основы DataOps.',
+      ],
+      outcomes: [
+        'Стандартизировал DWH/BI-решения и архитектурные гайдлайны в команде, снижая переделки и ручной труд при подготовке отчетов.',
+        'Спроектировал управление жизненным циклом данных для крупных корпоративных DWH (включая ландшафты масштаба ~200TB): контролируемый перенос данных между MPP и Hadoop и обратно.',
+        'Внедрял паттерны ingestion/integration для бизнес-систем (источники уровня Salesforce), повышая консистентность отчетности.',
+        'Готовил архитектуру, оценки и планы работ для enterprise-заказчиков; обеспечивал согласование со стейкхолдерами и исполнение.',
+        'Использовал AI как мультипликатор при нехватке ресурсов, сохраняя качество за счет обязательной ручной валидации.',
+      ],
+      outcomesLabel: 'Достижения',
       showMore: 'Показать больше',
       showLess: 'Скрыть',
+      operatingLabel: 'Как работаю',
+      operatingModel: [
+        'Стратегия: диагностика → целевая архитектура → поэтапный roadmap с критериями готовности и управлением рисками.',
+        'Governance: определения KPI, ownership и легкие процессы, которые масштабируются.',
+        'Delivery: короткие итерации, прозрачные зависимости, регулярный stakeholder cadence.',
+      ],
       focusLabel: 'Фокус',
       focus:
         'DWH, Data Lake, Data Mesh, ETL/ELT, Data Lineage, BI, интеграции, DataOps/MLOps.',
@@ -95,15 +119,15 @@ export const content = {
           role: 'Tech Lead / Архитектор DWH & BI / Presale-эксперт',
           dates: 'Август 2025 — н.в.',
           bullets: [
-            'Участие в развитии направления DWH/BI компании.',
-            'Подготовка и участие в тендерах и пресейлах: анализ требований, формирование архитектурных решений, подготовка оценок.',
-            'Архитектурное проектирование и техническое руководство проектами: декомпозиция задач, постановка задач команде, контроль сроков и качества.',
-            'Ведение проектной документации и взаимодействие с заказчиками на всех этапах.',
-            'Разработка архитектурных решений в области корпоративных хранилищ данных и BI.',
+            'Стандартизировал интеграцию данных SFE и подготовку отчетности, снизив ручной труд при создании и обновлении отчетов.',
+            'Задал и обеспечил соблюдение архитектурных гайдлайнов в команде из 4 инженеров, повысив предсказуемость и консистентность delivery.',
+            'Готовил архитектуру, оценки и план работ для тендеров/пресейла; переводил требования в реализуемую декомпозицию.',
+            'Вел техническое руководство delivery: постановка задач, контроль качества, документация и коммуникации с заказчиком.',
           ],
           moreBullets: [
-            'Ключевой проект — Крупная международная фармацевтическая компания: интеграция данных из Elma в глобальное корпоративное хранилище данных (AWS Athena, Amazon Redshift, dbt, Power BI).',
-            'Роль: Tech Lead — архитектура решения, проектирование пайплайнов, руководство командой data инженеров.',
+            'Данные: десятки миллионов записей из SFE/masterdata источников; пайплайны и витрины под отчетность.',
+            'Ключевой проект — крупная международная фармацевтическая компания: интеграция данных из Elma в глобальное корпоративное хранилище (AWS Athena, Amazon Redshift, dbt, Power BI).',
+            'Урок: AI критичен при нехватке ресурсов, но все артефакты и код должны проходить ручную верификацию.',
           ],
           stack:
             'AWS Athena, Amazon Redshift, dbt, Power BI, Postgres, Greenplum, Hadoop, Nifi, Airflow, Docker, Kubernetes, Kafka, Python, Java',
@@ -113,17 +137,15 @@ export const content = {
           role: 'Ведущий инженер-аналитик, Архитектор PBC',
           dates: 'Октябрь 2022 — Август 2025',
           bullets: [
-            'Проектирование продуктов для работы с данными в микросервисной архитектуре в парадигмах data factory и data mesh.',
-            'Исследование новых технологий и возможность их применения в технологической платформе.',
-            'Проработка и формализация требований и трансляция их в виде задач команде разработки продукта.',
-            'Совместная проработка продуктовых и проектных решений с архитекторами и владельцами продуктов.',
-            'Работа в географически распределенной команде по SCRUM.',
+            'Спроектировал управление жизненным циклом данных для корпоративного DWH банка (~200TB): контролируемый перенос данных между Greenplum и Hadoop и обратно.',
+            'Работал архитектором в delivery-команде 15–20 человек: согласование дизайна с эксплуатацией, процессами и ограничениями банка.',
+            'Проектировал продуктовые возможности работы с данными в микросервисной архитектуре (data factory / data mesh паттерны).',
+            'Исследовал и оценивал технологии, формируя pragmatic build-vs-buy решения для платформы.',
+            'Формализовал требования и переводил их в backlog для команды разработки.',
           ],
           moreBullets: [
-            'Реализовал механизм data ingestion и auto data lineage.',
-            '+10× ускорение обработки потоков данных.',
-            '+20% использование low-code инструментов.',
-            'Архитектура управления жизненным циклом данных для банка (Oracle/Arenadata/Hadoop/Hive/Airflow).',
+            'Спроектировал механизм ingestion и auto data lineage для продуктовой платформы.',
+            'Урок: в продуктовых задачах time-to-value и adoption так же важны, как корректность архитектуры.',
           ],
           stack:
             'Postgresql, Greenplum, Hadoop, Nifi, Airflow, Docker, Kubernetes, Kafka/API/SOAP/GRPC, Confluence, Python, Java',
@@ -148,13 +170,11 @@ export const content = {
           role: 'Заместитель директора по международным проектам',
           dates: 'Октябрь 2019 — Октябрь 2022',
           bullets: [
-            'Взаимодействие с клиентом: демонстрация экспертизы, выявление и формирование потребностей, презентация результатов.',
-            'Разработка и согласование технических документов (архитектуры, словарь данных, потоки данных, маппинг/lineage).',
-            'Контроль и управление проектными рисками.',
-            'Управление проектными ресурсами.',
-            'Предоставление экспертизы по BI-решениям для кросс-функциональных команд и помощь в presale.',
-            'Изучение решений и актуализация экспертизы в части BI/DWH/ML/DL.',
-            'Управление/поддержка проектных групп (2–15 человек).',
+            'Запускал data-платформы и BI для 1000+ пользователей: архитектура, roadmap, stakeholder management и delivery.',
+            'Интегрировал данные из нескольких Salesforce-систем (в т.ч. данные пациентов); десятки миллионов записей; стандартизировал пайплайны для устойчивой отчетности.',
+            'Управлял рисками и ресурсами в проектных группах до 15 человек; обеспечивал качество и сроки.',
+            'Готовил и согласовывал технические артефакты (архитектура, словарь данных, data flows, mapping/lineage) для ускорения alignment и sign-off.',
+            'При ограниченном бюджете на DWH использовал open-source и прагматичные подходы, чтобы быстрее дать бизнес-эффект.',
           ],
           moreBullets: [
             'Data-платформа для >1000 пользователей (Airflow, PostgreSQL, Tableau, Heroku (AWS), Docker, Git).',
@@ -164,6 +184,7 @@ export const content = {
             'Проектирование и разработка элементов DWH: raw, delta ETL, table enrichment, data vault, virtual business logic, star/snowflake schemas, data marts, data mesh.',
             'Проектирование и внедрение BI-инструментов: источники, модель данных, фильтры, права доступа, RLS.',
             'Работа с DevOps для организации CI/CD (DataOps, MLOps).',
+            'Урок: если нет бюджета на DWH, важно быстро собрать минимальную архитектуру, которая обеспечивает консистентность и масштабирование.',
           ],
           stack:
             'Airflow, PostgreSQL, Tableau, Heroku (AWS), Docker, Git, Salesforce, SAP, Power BI, Python, Data Vault',
@@ -410,7 +431,15 @@ export const content = {
         'AI-native: Cursor/Claude daily driver; I automate routine work and ship faster.',
       ],
       badges: ['ex-Cisco', 'ex-EY', 'ex-CEO SOYUZ-317'],
+      proof: [
+        'Data strategy & roadmap',
+        '200TB-class DWH lifecycle',
+        '10M+ records pipelines',
+        'Teams up to 20',
+      ],
       carouselTitle: 'Sections',
+      carouselPrev: 'Prev',
+      carouselNext: 'Next',
       ctas: {
         hh: 'CV (HH)',
         services: 'Services',
@@ -420,14 +449,30 @@ export const content = {
         hh: 'https://hh.ru/resume/73d656b6ff00cd8d0d0039ed1f4350786e394d',
       },
       constellationHint:
-        'Click a node to jump to a section (text navigation is available as a fallback).',
+        'Click a card to jump to a section.',
     },
     about: {
       title: 'About',
-      body:
-        'I build and scale enterprise DWH and data platforms, BI systems, and integrations — combining architecture with hands-on: data models, ETL/ELT pipelines, integrations, CI/CD, code review. I have experience in enterprise, consulting, and product teams. Led as Tech Lead and data practice head, interfacing with C-level stakeholders. Took an ML product from hypothesis to production. Served as CEO at IT company «SOYUZ-317». Open to collaboration: full-time, project, consulting, as a contractor. I own results and consistently exceed expectations through system thinking, automation, and active AI use in analytics and development.',
+      positioning: [
+        'I lead data strategy and delivery: roadmap, platform architecture, governance, and BI executives trust.',
+        'I combine strategy with hands-on architecture: DWH/lakehouse, lifecycle management, integrations, and DataOps foundations.',
+      ],
+      outcomes: [
+        'Standardized DWH/BI solutions and architectural guidelines across teams to reduce rework and manual reporting effort.',
+        'Designed data lifecycle management for large-scale enterprise DWH (including ~200TB-class estates): controlled movement between MPP and Hadoop and back.',
+        'Shipped ingestion/integration patterns for business systems (Salesforce-class sources) and improved consistency of reporting outputs.',
+        'Delivered scoped architectures, estimates, and delivery plans for enterprise clients; aligned stakeholders and execution.',
+        'Used AI as a force multiplier in constrained teams while keeping quality via manual verification.',
+      ],
+      outcomesLabel: 'Highlights',
       showMore: 'Show more',
       showLess: 'Hide',
+      operatingLabel: 'How I operate',
+      operatingModel: [
+        'Strategy: discovery → target architecture → phased roadmap with acceptance criteria and risk management.',
+        'Governance: KPI definitions, ownership, and lightweight processes that scale.',
+        'Delivery: small increments, clear dependencies, predictable stakeholder cadence.',
+      ],
       focusLabel: 'Focus',
       focus:
         'DWH, Data Lake, Data Mesh, ETL/ELT, Data Lineage, BI, integrations, DataOps/MLOps.',
@@ -442,12 +487,15 @@ export const content = {
           role: 'Tech Lead / DWH & BI Architect / Presale Expert',
           dates: 'August 2025 — now',
           bullets: [
-            'Growing DWH/BI practice: tenders, presales, architecture design, estimates.',
-            'Architectural design and technical leadership: task decomposition, team management, schedule/quality control.',
-            'Technical documentation and client communication across all project stages.',
+            'Standardized SFE data integration and reporting delivery, reducing manual effort to create and update reports.',
+            'Defined and enforced architectural guidelines for a small team (4), improving consistency and delivery predictability.',
+            'Owned presales: turned requirements into target architecture, estimates, and an executable delivery plan.',
+            'Led delivery execution: task decomposition, quality control, documentation, and client communication.',
           ],
           moreBullets: [
+            'Data scale: tens of millions of records from SFE/masterdata sources; pipelines and marts for reporting.',
             'Key project: large international pharma company — Elma CRM data integration into global DWH (AWS Athena, Amazon Redshift, dbt, Power BI).',
+            'Lesson learned: AI is crucial when resources are tight, but every generated artifact must be manually verified.',
           ],
           stack:
             'AWS Athena, Amazon Redshift, dbt, Power BI, Postgres, Greenplum, Hadoop, Nifi, Airflow, Docker, Kubernetes, Kafka, Python, Java',
@@ -457,16 +505,15 @@ export const content = {
           role: 'Lead Engineer-Analyst, PBC Architect',
           dates: 'October 2022 — August 2025',
           bullets: [
-            'Designing data products in microservices architecture under data factory and data mesh paradigms.',
-            'New technology research and platform evaluation.',
-            'Requirements engineering and translating them into development tasks.',
-            'Collaborating with architects and product owners; distributed SCRUM team.',
+            'Designed data lifecycle management for a bank corporate DWH (~200TB): controlled movement between Greenplum and Hadoop and back.',
+            'Worked as an architect within a 15–20 person delivery: aligned design with operations, processes, and bank constraints.',
+            'Designed data platform product capabilities in a microservices architecture (data factory / data mesh patterns).',
+            'Evaluated technologies and shaped pragmatic build-vs-buy decisions for the platform.',
+            'Translated requirements into an actionable backlog for engineering teams.',
           ],
           moreBullets: [
-            'Implemented data ingestion mechanism and auto data lineage.',
-            '+10× data stream processing performance improvement.',
-            '+20% low-code tool adoption.',
-            'Data lifecycle management architecture for a large bank (Oracle/Arenadata/Hadoop/Hive/Airflow).',
+            'Designed ingestion approach and auto data lineage for the product platform.',
+            'Lesson learned: time-to-value and adoption matter as much as architectural correctness in product work.',
           ],
           stack:
             'Postgresql, Greenplum, Hadoop, Nifi, Airflow, Docker, Kubernetes, Kafka/API/SOAP/GRPC, Confluence, Python, Java',
@@ -491,11 +538,11 @@ export const content = {
           role: 'Deputy Director, International Projects (BI/DWH/Data Department)',
           dates: 'October 2019 — October 2022',
           bullets: [
-            'Client engagement: expertise demonstration, needs discovery, results presentation.',
-            'Technical documentation: architectures, data dictionary, data flows, lineage.',
-            'Risk management and project resource management.',
-            'BI expertise for cross-functional teams; presales, MVP, POC support.',
-            'Managing project groups (2–15 people).',
+            'Delivered data platforms and BI for 1000+ users: architecture, roadmap, stakeholder management, and delivery execution.',
+            'Integrated multiple Salesforce systems (including patient-related data): tens of millions of records; standardized pipelines for reliable reporting.',
+            'Managed delivery risk and resourcing in project groups up to 15 people; protected quality and timelines.',
+            'Produced and aligned technical artifacts (architecture, data dictionary, flows, mapping/lineage) to accelerate sign-off and execution.',
+            'When DWH budget was constrained, used open-source and pragmatic approaches to ship value faster.',
           ],
           moreBullets: [
             'Data platform for 1000+ users (Airflow, PostgreSQL, Tableau, Heroku/AWS, Docker, Git).',
@@ -505,6 +552,7 @@ export const content = {
             'DWH design: raw, delta ETL, table enrichment, data vault, virtual business logic, star/snowflake schemas, data marts, data mesh.',
             'BI tools design: sources, model, filters, permissions, RLS.',
             'CI/CD for DataOps/MLOps.',
+            'Lesson learned: when there is no DWH budget, ship the minimum architecture that enforces consistency and can scale.',
           ],
           stack:
             'Airflow, PostgreSQL, Tableau, Heroku (AWS), Docker, Git, Salesforce, SAP, Power BI, Python, Data Vault',

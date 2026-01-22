@@ -36,7 +36,7 @@
   }
 
   a {
-    @apply text-accent hover:opacity-90;
+    @apply text-inherit;
   }
 
   ::selection {
@@ -58,5 +58,16 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .reveal-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 600ms ease, transform 600ms ease;
   }
 }

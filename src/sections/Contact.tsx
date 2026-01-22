@@ -23,7 +23,7 @@ export function Contact({ c }: { c: Content }) {
           <div className="text-xs font-mono text-muted">{c.contact.telegramLabel}</div>
           <div className="mt-2 flex items-center justify-between gap-3">
             <a
-              className="text-lg font-semibold"
+              className="text-lg font-semibold text-accent hover:opacity-90"
               href={`https://t.me/${c.contact.telegram.replace('@', '')}`}
               target="_blank"
               rel="noreferrer"
@@ -48,7 +48,10 @@ export function Contact({ c }: { c: Content }) {
         <div className="rounded-3xl border border-border bg-card/70 p-6 shadow-soft">
           <div className="text-xs font-mono text-muted">{c.contact.emailLabel}</div>
           <div className="mt-2 flex items-center justify-between gap-3">
-            <a className="text-lg font-semibold" href={`mailto:${c.contact.email}`}>
+            <a
+              className="text-lg font-semibold text-accent hover:opacity-90"
+              href={`mailto:${c.contact.email}`}
+            >
               {c.contact.email}
             </a>
             <button
