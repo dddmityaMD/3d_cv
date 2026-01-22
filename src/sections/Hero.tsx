@@ -24,9 +24,13 @@ export function Hero({
   useEffect(() => {
     if (!activeSectionId) return
     const idx = navNodes.findIndex((n) => n.id === activeSectionId)
-    if (idx < 0) return
-    setCarouselIndex(idx)
-  }, [activeSectionId, navNodes])
+    if (idx < 0 || idx === carouselIndex) return
+    if (typeof window === 'undefined') return
+    const raf = window.requestAnimationFrame(() => {
+      setCarouselIndex(idx)
+    })
+    return () => window.cancelAnimationFrame(raf)
+  }, [activeSectionId, carouselIndex, navNodes])
 
   return (
     <section className="pt-10 sm:pt-14">

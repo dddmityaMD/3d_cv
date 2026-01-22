@@ -111,19 +111,19 @@ export default function ThreeConstellationNav({
   reducedMotion: boolean
 }) {
   const canRender = nodes.length >= 6
-
-  if (!canRender) return null
-
   const sceneNodes = useMemo<NodeDef[]>(
-    () => [
-      { ...nodes[0]!, position: [-1.9, 0.35, 0] },
-      { ...nodes[1]!, position: [-0.7, -0.25, 0.2] },
-      { ...nodes[2]!, position: [0.35, 0.5, -0.1] },
-      { ...nodes[3]!, position: [1.45, -0.2, 0.15] },
-      { ...nodes[4]!, position: [0.8, -0.95, -0.15] },
-      { ...nodes[5]!, position: [-0.1, -0.75, 0.1] },
-    ],
-    [nodes],
+    () =>
+      canRender
+        ? [
+            { ...nodes[0]!, position: [-1.9, 0.35, 0] },
+            { ...nodes[1]!, position: [-0.7, -0.25, 0.2] },
+            { ...nodes[2]!, position: [0.35, 0.5, -0.1] },
+            { ...nodes[3]!, position: [1.45, -0.2, 0.15] },
+            { ...nodes[4]!, position: [0.8, -0.95, -0.15] },
+            { ...nodes[5]!, position: [-0.1, -0.75, 0.1] },
+          ]
+        : [],
+    [canRender, nodes],
   )
 
   const links = useMemo<Array<[number, number]>>(
@@ -138,6 +138,8 @@ export default function ThreeConstellationNav({
     ],
     [],
   )
+
+  if (!canRender) return null
 
   return (
     <div className="h-[260px] w-full rounded-3xl border border-border bg-card/60 shadow-soft">

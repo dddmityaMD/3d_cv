@@ -11,13 +11,11 @@ type Props = {
 
 export function Reveal({ children, reducedMotion, delayMs = 0, className }: Props) {
   const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
+  const [hasIntersected, setHasIntersected] = useState(false)
+  const visible = Boolean(reducedMotion || hasIntersected)
 
   useEffect(() => {
-    if (reducedMotion) {
-      setVisible(true)
-      return
-    }
+    if (reducedMotion) return
 
     const el = ref.current
     if (!el) return
@@ -25,7 +23,7 @@ export function Reveal({ children, reducedMotion, delayMs = 0, className }: Prop
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting) return
-        setVisible(true)
+        setHasIntersected(true)
         io.disconnect()
       },
       { threshold: 0.12, rootMargin: '0px 0px -10% 0px' },

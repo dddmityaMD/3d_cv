@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
 import { useEffect, useRef } from 'react'
 
 type Node = {
@@ -22,6 +22,12 @@ function mod(n: number, m: number) {
   return ((n % m) + m) % m
 }
 
+const getNow = () => Date.now()
+
+function markInteraction(ref: MutableRefObject<number>) {
+  ref.current = getNow()
+}
+
 export function Carousel3DNav({
   nodes,
   activeId,
@@ -34,10 +40,6 @@ export function Carousel3DNav({
 }: Props) {
   const count = nodes.length
   const lastUserInteraction = useRef(0)
-
-  const markInteracted = () => {
-    lastUserInteraction.current = Date.now()
-  }
 
   useEffect(() => {
     if (reducedMotion) return
@@ -95,7 +97,7 @@ export function Carousel3DNav({
                   : 'transform 420ms ease, opacity 320ms ease',
               }}
               onClick={() => {
-                markInteracted()
+                markInteraction(lastUserInteraction)
                 if (index === i) {
                   onNavigate(n.id)
                   return
@@ -143,7 +145,7 @@ export function Carousel3DNav({
             type="button"
             className="rounded-full border border-border bg-card/80 px-3 py-2 text-xs font-mono text-fg shadow-soft transition hover:border-accent/40"
             onClick={() => {
-              markInteracted()
+              markInteraction(lastUserInteraction)
               setIndex(mod(index - 1, count))
             }}
             aria-label={prevLabel}
@@ -154,7 +156,7 @@ export function Carousel3DNav({
             type="button"
             className="rounded-full border border-border bg-card/80 px-3 py-2 text-xs font-mono text-fg shadow-soft transition hover:border-accent/40"
             onClick={() => {
-              markInteracted()
+              markInteraction(lastUserInteraction)
               setIndex(mod(index + 1, count))
             }}
             aria-label={nextLabel}
